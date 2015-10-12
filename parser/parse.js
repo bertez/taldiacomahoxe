@@ -7,7 +7,6 @@ const writer = require('./modules/writer');
 
 const feedUrl = new LoadUrl('https://gl.wikipedia.org/wiki/366_d%C3%ADas_do_ano');
 
-//load index
 feedUrl.load().then(feeder)
     .then(urls => new Processor(urls).all())
     .then(writer)

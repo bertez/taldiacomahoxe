@@ -12,3 +12,4 @@ feedUrl.load().then(feeder)
     .then(writer)
     .then(status => console.log(status))
     .catch(error => console.log(error));
+

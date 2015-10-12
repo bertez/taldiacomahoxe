@@ -3,7 +3,7 @@
 const cheerio = require('cheerio');
 const LoadUrl = require('./loader');
 const sleep = require('./helpers').sleep;
-const capitalize = require('./helpers').capitalize;
+const cleaner = require('./cleaner');
 
 class Processor {
     constructor(urls) {
@@ -68,11 +68,11 @@ class Processor {
                                             events.push({
                                                 category,
                                                 year,
-                                                text: capitalize($(el).text())
+                                                text: cleaner($(el).text())
                                             });
                                         });
                                     } else {
-                                        let text = capitalize($el.text().replace(/^-?\d+,?:?\s?-?\s/, ''));
+                                        let text = cleaner($el.text().replace(/^-?\d+,?:?\s?-?\s/, ''));
 
                                         events.push({
                                             category,
@@ -100,7 +100,7 @@ class Processor {
 
     processAll(fn) {
         if (this.current < this.end) {
-            sleep(3).then(() => {
+            sleep(2).then(() => {
                 this.process(this.current).then((data) => {
                     this.data[this.parseData(this.current)] = data;
                     this.current++;
